@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+<constant name="struts.costom.i18n.resources" value="globalMessages"/>
+<constant name="struts.i18n.encoding" value="UTF-8"/>		
+<package name="I18N" extends="struts-default">		
+		<action name="checkLogin" class="action.LoginActionI18N">
+			<result name="success">/exp02/LoginSuccessI18N.jsp</result>
+			<result name="error">/exp02/ChineseAndEnglishLogin.jsp</result>
+		</action>
+
+</package>
+     
+<package name="zc" extends="struts-default">
+		<action name="counter" class="action.CountAction">
+			<result name="success">/exp02/counter.jsp</result>
+		</action>
+				
+		<action name="ioc" class="action.IoCAction">
+			<result name="success">/exp02/success1.jsp</result>
+			<result name="error">/exp02/login.jsp</result>
+		</action>	
+					
+		<action name="register" class="action.RegisterAction">
+			<result name="success">/exp02/registerSuccess.jsp</result>
+		</action>
+		
+		  <action name="upload" class="action.UploadAction">
+            <!--fileUpload拦截器配置-->
+            <interceptor-ref name="fileUpload">
+                <!--设置上传文件的最大字节数-->
+                <param name="maximumSize">10000000</param>
+                <!--设置上传文件的类型-->
+                <param name="allowedTypes">
+                    image/gif,image/png,image/jpeg,image/jpg,image/pjpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            <!--设置上传文件保持的文件夹-->
+            <param name="savePath">/exp02upload/</param>
+            <result name="input">/exp02/fileUp.jsp</result> 
+            <result name="success">/exp02/fileUpSuccess.jsp</result> 
+        </action>
+		
+		<action name="filedownload" class="action.FileDownload">
+			<param name="path">/exp02/连接池编码.txt</param>
+			<result name="success" type="stream">
+				<param name="contentType">txt</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="druid.txt"</param>
+				<param name="bufferSize">40960</param>
+			</result>
+		
+		</action>
+</package> 
+	
+</struts>
